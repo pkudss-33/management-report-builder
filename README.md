@@ -55,17 +55,6 @@ npx skills add pkudss-33/management-report-builder
 
 > "把这些战略方向写成核心策略报告"
 
-## 与 huangwei-report-builder 的区别
-
-| | Management Report Builder | Huangwei Report Builder |
-|---|---|---|
-| **用途** | 管理报告 / 策略摘要 / 一页纸 | 研究报告 / 调研分析 / 多源信息合成 |
-| **读者** | 管理层 / 决策者 | 研究者 / 分析师 |
-| **篇幅** | 单页线性滚动，10 分钟可读完 | 多节完整报告，层层递进 |
-| **风格** | 结论先行、方向性、可扫描 | 证据驱动、方法论显性、来源标注 |
-| **字体** | Inter + Noto Sans SC 细体 | Noto Serif SC + Noto Sans SC |
-| **配色** | 冷调企业色（蓝/绿/琥珀） | 暖调编辑色（黄铜金/海军蓝） |
-
 ## 文件结构
 
 ```
