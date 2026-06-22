@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  ONE-PAGE LINEAR MANAGEMENT / STRATEGY REPORT TEMPLATE
+  ---------------------------------------------------------------------------
+  DESIGN SYSTEM: Clean corporate, thin modern fonts, cool-tone palette,
+  grid-based cards, linear single-page scroll. Inspired by top-tier strategy
+  consulting one-pagers.
+
+  HOW TO USE
+  1. Copy this whole file. Keep the <style> block AS-IS (it is the design system).
+  2. Replace every [[...]] placeholder with real, distilled content.
+     Delete component examples you don't use.
+  3. Keep section kickers sequentially numbered (01,02,03...). If you add/remove
+     a section, renumber them.
+  4. Save the finished file as <name>.html and present it.
+
+  THEME: to re-skin for a different brand, only change the :root CSS variables.
+  Do not restyle individual components.
+
+  FONT SYSTEM: Inter (Latin, weights 300/400/500/600) + Noto Sans SC (CJK,
+  weights 300/400/500/700). Lighter, cleaner, more modern than typical
+  system-font stacks. Loaded from Google Fonts.
+
+  CRITICAL GOTCHAS:
+  - Dark boxes: if you add any dark-background block, give its <p> a light
+    color explicitly — the global color will otherwise make it unreadable.
+  - Font loading: the <link> tags in <head> must stay intact for the thin
+    modern font system to work.
+  - Images: always add loading="lazy" and an onerror fallback. Prefer base64
+    for offline rendering.
+  - Numbering: section-kicker labels must be sequential.
+  ============================================================================
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[[报告标题 · 管理报告]]</title>
+<meta name="description" content="[[一句话描述]]">
+<meta name="color-scheme" content="light">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  /* =======================================================================
+     DESIGN SYSTEM — change :root variables to re-skin; keep everything else.
+     ======================================================================= */
+  :root {
+    /* ---- Core palette ---- */
+    --ink: #172033;
+    --muted: #5f6b7c;
+    --subtle: #edf1f5;
+    --line: #d9e0e7;
+    --paper: #ffffff;
+    --wash: #f7f9fb;
+
+    /* ---- Accent colors (cool corporate) ---- */
+    --blue: #2457d6;
+    --green: #0b7a5b;
+    --amber: #aa6a00;
+    --red: #b04444;
+    --teal: #0f6f7d;
+
+    /* ---- Surfaces ---- */
+    --shadow: 0 18px 50px rgba(23, 32, 51, .08);
+    --radius: 8px;
+
+    /* ---- Typography — thin modern sans-serif ---- */
+    --body: "Inter", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Microsoft YaHei", sans-serif;
+    --body-weight: 300;
+  }
+
+  /* ---- Reset & base ---- */
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: var(--body);
+    font-weight: var(--body-weight);
+    color: var(--ink);
+    background: var(--wash);
+    line-height: 1.72;
+    letter-spacing: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+
+  /* ---- Progress bar ---- */
+  .progress {
+    position: fixed;
+    inset: 0 auto auto 0;
+    height: 3px;
+    width: 0;
+    background: linear-gradient(90deg, var(--blue), var(--green), var(--amber));
+    z-index: 20;
+  }
+
+  /* ---- Page wrapper ---- */
+  .page { min-height: 100vh; }
+
+  /* =======================================================================
+     HERO HEADER
+     ======================================================================= */
+  .hero {
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+  }
+  .hero-inner {
+    width: min(1320px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 58px 0 34px;
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--green);
+    font-weight: 600;
+    font-size: 14px;
+    margin: 0 0 18px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 34px;
+    height: 2px;
+    background: var(--green);
+    display: inline-block;
+  }
+  h1 {
+    margin: 0;
+    font-size: clamp(38px, 5.3vw, 72px);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: 0;
+    max-width: 1180px;
+  }
+  .lead {
+    margin: 24px 0 0;
+    max-width: 980px;
+    font-size: 20px;
+    font-weight: 300;
+    color: #354156;
+    line-height: 1.85;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr .8fr;
+    gap: 24px;
+    margin-top: 34px;
+    align-items: stretch;
+  }
+  .thesis, .toc-box {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: #fbfcfd;
+    padding: 22px;
+  }
+  .thesis strong { color: var(--blue); font-weight: 600; }
+  .toc-box h2, .thesis h2 {
+    margin: 0 0 12px;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  .toc-box ol {
+    margin: 0;
+    padding-left: 20px;
+    color: var(--muted);
+    font-size: 15px;
+    font-weight: 300;
+    columns: 2;
+    column-gap: 26px;
+  }
+  .toc-box li { break-inside: avoid; margin: 3px 0; }
+
+  /* =======================================================================
+     MAIN CONTENT
+     ======================================================================= */
+  main { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+
+  section {
+    padding: 54px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  section:last-child { border-bottom: 0; }
+
+  /* ---- Section head ---- */
+  .section-head {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 34px;
+    align-items: start;
+    margin-bottom: 28px;
+  }
+  .section-kicker {
+    color: var(--blue);
+    font-weight: 600;
+    font-size: 13px;
+  }
+  h2 {
+    margin: 0;
+    font-size: clamp(26px, 3vw, 42px);
+    font-weight: 500;
+    line-height: 1.22;
+    letter-spacing: 0;
+  }
+  h3 {
+    margin: 0 0 12px;
+    font-size: 21px;
+    font-weight: 500;
+    line-height: 1.35;
+  }
+  p { margin: 0 0 14px; }
+  .section-lede {
+    color: #354156;
+    font-size: 18px;
+    font-weight: 300;
+    max-width: 850px;
+  }
+
+  /* =======================================================================
+     COMPONENT: Card grids (2-col & 3-col)
+     ======================================================================= */
+  .two-col, .three-col {
+    display: grid;
+    gap: 18px;
+    margin-top: 22px;
+  }
+  .two-col { grid-template-columns: repeat(2, 1fr); }
+  .three-col { grid-template-columns: repeat(3, 1fr); }
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px;
+  }
+  .card.accent-blue  { border-top: 4px solid var(--blue); }
+  .card.accent-green { border-top: 4px solid var(--green); }
+  .card.accent-amber { border-top: 4px solid var(--amber); }
+  .card.accent-red   { border-top: 4px solid var(--red); }
+  .card.accent-teal  { border-top: 4px solid var(--teal); }
+
+  /* =======================================================================
+     COMPONENT: Callout (left-border accent box)
+     ======================================================================= */
+  .callout {
+    border-left: 4px solid var(--green);
+    background: #f4faf7;
+    padding: 18px 20px;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    margin: 18px 0 0;
+    font-weight: 500;
+    color: #17382f;
+  }
+
+  /* =======================================================================
+     COMPONENT: Panel (bordered box)
+     ======================================================================= */
+  .panel {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px;
+  }
+  .muted { color: var(--muted); }
+
+  /* =======================================================================
+     COMPONENT: Timeline (3-stage evolution)
+     ======================================================================= */
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 24px;
+  }
+  .stage {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px;
+    position: relative;
+  }
+  .stage::before {
+    content: attr(data-step);
+    display: inline-grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #e8eefc;
+    color: var(--blue);
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .stage:nth-child(2)::before { background: #e5f4ef; color: var(--green); }
+  .stage:nth-child(3)::before { background: #fff2d9; color: var(--amber); }
+  .stage ul, .clean-list { margin: 10px 0 0; padding-left: 18px; color: var(--muted); font-weight: 300; }
+  .stage li, .clean-list li { margin: 5px 0; }
+
+  /* =======================================================================
+     COMPONENT: Logic strip (two ideas connected by arrow)
+     ======================================================================= */
+  .logic-strip {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: stretch;
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .logic-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px;
+  }
+  .logic-card.resource  { border-top: 4px solid var(--amber); }
+  .logic-card.decision  { border-top: 4px solid var(--green); }
+  .logic-card.strategy  { border-top: 4px solid var(--blue); }
+  .arrow {
+    align-self: center;
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 28px;
+  }
+
+  /* =======================================================================
+     COMPONENT: Table
+     ======================================================================= */
+  .table-wrap { overflow-x: auto; margin-top: 18px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    font-size: 15px;
+    font-weight: 300;
+  }
+  th, td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+    text-align: left;
+  }
+  th {
+    background: #eef3f8;
+    color: #273247;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  tr:last-child td { border-bottom: 0; }
+  td:first-child { font-weight: 500; color: #263247; }
+
+  /* =======================================================================
+     COMPONENT: Formula row (A + B + C = ...)
+     ======================================================================= */
+  .formula {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: 12px;
+    align-items: stretch;
+    margin: 24px 0;
+  }
+  .formula .piece {
+    padding: 20px;
+    border-radius: var(--radius);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    min-height: 112px;
+  }
+  .formula .op {
+    align-self: center;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+
+  /* =======================================================================
+     COMPONENT: Tags / pills
+     ======================================================================= */
+  .tag {
+    display: inline-block;
+    padding: 3px 8px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: #f9fbfd;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tags span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: #eef3f8;
+    color: #35506f;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  /* =======================================================================
+     COMPONENT: Flow (horizontal process steps)
+     ======================================================================= */
+  .flow {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    margin-top: 18px;
+  }
+  .flow div {
+    min-height: 86px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--paper);
+    padding: 14px;
+    font-weight: 500;
+    color: #263247;
+  }
+  .flow span {
+    display: block;
+    margin-top: 6px;
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* =======================================================================
+     COMPONENT: Voice / perspective grid
+     ======================================================================= */
+  .voice-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 22px;
+  }
+  .voice-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .voice-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 4px;
+    background: var(--blue);
+  }
+  .voice-card:nth-child(2)::before { background: var(--green); }
+  .voice-card:nth-child(3)::before { background: var(--amber); }
+  .voice-label {
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  /* =======================================================================
+     COMPONENT: Challenge grid (amber-tinted problem cards)
+     ======================================================================= */
+  .challenge-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .challenge-card {
+    background: #fffdf7;
+    border: 1px solid #eadfc4;
+    border-radius: var(--radius);
+    padding: 18px;
+  }
+  .challenge-card h3 { color: #6d4700; font-weight: 500; }
+
+  /* =======================================================================
+     COMPONENT: Path map (seller/buyer or two-track process)
+     ======================================================================= */
+  .path-note {
+    background: #f8fafc;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    margin-top: 18px;
+    font-size: 16px;
+    font-weight: 400;
+  }
+  .path-note strong { color: var(--ink); }
+  .path-map {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    margin-top: 22px;
+  }
+  .path-panel {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px;
+  }
+  .path-panel.track-a { border-top: 4px solid var(--blue); }
+  .path-panel.track-b { border-top: 4px solid var(--green); }
+  .path-panel h3 { margin-bottom: 6px; }
+  .path-panel > p { color: var(--muted); font-weight: 400; margin-bottom: 14px; }
+  .path-step {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 14px;
+    padding: 13px 0;
+    border-top: 1px solid var(--line);
+  }
+  .path-step:first-of-type { border-top: 0; }
+  .path-step b { color: var(--ink); font-weight: 500; }
+  .path-step p { margin: 3px 0 7px; color: var(--ink); font-size: 14px; font-weight: 300; }
+
+  /* =======================================================================
+     COMPONENT: Base map (foundation elements)
+     ======================================================================= */
+  .base-map {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 18px;
+  }
+  .base-card {
+    background: #fffdf7;
+    border: 1px solid #eadfc4;
+    border-radius: var(--radius);
+    padding: 18px;
+  }
+  .base-card h3 { color: #6d4700; font-weight: 500; }
+
+  /* =======================================================================
+     COMPONENT: Decision model (side-by-side with images)
+     ======================================================================= */
+  .decision-model {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    margin-top: 22px;
+  }
+  .model-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px;
+    min-height: 260px;
+  }
+  .model-image {
+    width: 100%;
+    display: block;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: #f7f9fb;
+    margin: 16px 0 14px;
+  }
+
+  /* =======================================================================
+     COMPONENT: Role map
+     ======================================================================= */
+  .role-map {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 22px;
+  }
+  .role-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px;
+  }
+  .role-code {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--blue);
+    margin-bottom: 8px;
+  }
+
+  /* =======================================================================
+     COMPONENT: Avoid / warning grid
+     ======================================================================= */
+  .avoid-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 20px;
+  }
+  .avoid-item {
+    background: #fffafa;
+    border: 1px solid #f0d6d6;
+    border-radius: var(--radius);
+    padding: 16px;
+  }
+  .avoid-item strong { color: var(--red); display: block; margin-bottom: 6px; font-weight: 600; }
+
+  /* =======================================================================
+     COMPONENT: Summary box & summary grid (closing synthesis)
+     ======================================================================= */
+  .summary-box {
+    background: var(--paper);
+    color: var(--ink);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 28px;
+    margin-top: 22px;
+  }
+  .summary-box p { color: #354156; }
+  .summary-box strong { color: var(--ink); font-weight: 600; }
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 20px;
+  }
+  .summary-tile {
+    background: #f8fbff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 16px;
+  }
+  .summary-tile b {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--blue);
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .summary-tile span {
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* =======================================================================
+     COMPONENT: One-page tabs (embed project one-pagers)
+     ======================================================================= */
+  .onepage-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 22px;
+    padding: 6px;
+    background: #eef3f8;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+  }
+  .onepage-tab {
+    appearance: none;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    background: transparent;
+    color: #344258;
+    cursor: pointer;
+    font: 600 14px/1.2 var(--body);
+    min-height: 38px;
+    padding: 9px 13px;
+  }
+  .onepage-tab:hover { background: rgba(255, 255, 255, .64); }
+  .onepage-tab[aria-selected="true"] {
+    background: var(--paper);
+    border-color: var(--line);
+    color: var(--blue);
+    box-shadow: 0 8px 20px rgba(23, 32, 51, .08);
+  }
+  .onepage-stage {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-top: 14px;
+    overflow: hidden;
+  }
+  .onepage-stage-frame {
+    display: block;
+    width: 100%;
+    min-height: 900px;
+    border: 0;
+    background: #fff;
+    overflow: hidden;
+  }
+
+  /* =======================================================================
+     FOOTER
+     ======================================================================= */
+  footer {
+    width: min(1180px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 30px 0 48px;
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 300;
+  }
+
+  /* =======================================================================
+     RESPONSIVE BREAKPOINTS
+     ======================================================================= */
+  @media (max-width: 900px) {
+    .hero-inner, main, footer { width: min(100% - 28px, 1180px); }
+    .hero-inner { padding-top: 40px; }
+    .hero-grid, .section-head, .logic-strip, .two-col, .three-col,
+    .formula, .role-map, .avoid-grid, .summary-grid, .voice-grid,
+    .challenge-grid, .decision-model, .path-map, .base-map {
+      grid-template-columns: 1fr;
+    }
+    .toc-box ol { columns: 1; }
+    .arrow, .formula .op { transform: rotate(90deg); justify-self: center; }
+    .timeline { grid-template-columns: 1fr; }
+    .flow { grid-template-columns: repeat(2, 1fr); }
+    .onepage-tabs { overflow-x: auto; flex-wrap: nowrap; }
+    .onepage-tab { flex: 0 0 auto; }
+    .onepage-stage-frame { min-height: 720px; }
+    h1 { font-size: clamp(34px, 10vw, 52px); }
+    .lead { font-size: 18px; }
+    section { padding: 40px 0; }
+  }
+
+  @media (min-width: 901px) {
+    h1, h2 { white-space: nowrap; word-break: keep-all; }
+  }
+
+  @media (max-width: 560px) {
+    .flow { grid-template-columns: 1fr; }
+    th, td { padding: 12px; }
+    table { font-size: 14px; }
+    .panel, .card, .stage, .role-card { padding: 18px; }
+    .onepage-stage-frame { min-height: 640px; }
+  }
+
+  @media print {
+    body { background: #fff; }
+    .progress { display: none; }
+    .hero, section { border-color: #c9ced6; }
+    .panel, .card, .stage, .role-card, .logic-card { box-shadow: none; break-inside: avoid; }
+    a { text-decoration: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== PROGRESS BAR ==================== -->
+<div class="progress" id="progress"></div>
+
+<div class="page">
+
+  <!-- ==================== HERO HEADER ==================== -->
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">[[面向读者 · 报告定性，如：面向管理层 / 内部讨论稿]]</p>
+      <h1>[[主标题 · 一句话核心主张]]</h1>
+      <p class="lead">[[一句话定位：这是关于什么的报告，为什么现在重要。读者读完这一句就应该知道这篇报告要回答什么问题。]]</p>
+
+      <!-- OPTIONAL hero-grid with thesis + TOC (delete if not wanted) -->
+      <div class="hero-grid" style="display:none">
+        <div class="thesis">
+          <h2>核心主张</h2>
+          <p><strong>[[一句话核心判断]]</strong>：[[展开说明。]]</p>
+        </div>
+        <div class="toc-box">
+          <h2>目录</h2>
+          <ol>
+            <li>[[01 章节名]]</li>
+            <li>[[02 章节名]]</li>
+            <li>[[03 章节名]]</li>
+            <li>[[04 章节名]]</li>
+            <li>[[05 章节名]]</li>
+            <li>[[06 章节名]]</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ==================== 01 核心结论 ==================== -->
+    <section id="s-core">
+      <div class="section-head">
+        <div class="section-kicker">01 / [[章节标签，如：核心结论]]</div>
+        <div>
+          <h2>[[核心结论标题]]</h2>
+          <p class="section-lede">[[一句话 lead：把最重要的判断先讲清楚。]]</p>
+        </div>
+      </div>
+
+      <p>[[展开核心论点。证据先行、结论明确。2–4 句足够。]]</p>
+
+      <!-- CALLOUT: use for a single key insight -->
+      <div class="callout">[[一条值得高亮的关键判断。这句话应该能独立传播。]]</div>
+
+      <!-- OPTIONAL: Summary grid for key takeaways -->
+      <!--
+      <div class="summary-grid">
+        <div class="summary-tile"><b>[[数字或关键词]]</b><span>[[一句话说明]]</span></div>
+        <div class="summary-tile"><b>[[数字或关键词]]</b><span>[[一句话说明]]</span></div>
+        <div class="summary-tile"><b>[[数字或关键词]]</b><span>[[一句话说明]]</span></div>
+      </div>
+      -->
+    </section>
+
+    <!-- ==================== 02 背景 / 现状 ==================== -->
+    <section id="s-context">
+      <div class="section-head">
+        <div class="section-kicker">02 / [[章节标签，如：背景与现状]]</div>
+        <div>
+          <h2>[[背景与现状标题]]</h2>
+          <p class="section-lede">[[一句话 lead：现在处于什么阶段，面临什么关键变化。]]</p>
+        </div>
+      </div>
+
+      <!-- OPTION A: Two-card compare (current vs target, or two perspectives) -->
+      <!--
+      <div class="two-col">
+        <article class="card accent-amber">
+          <h3>[[当前状态标题]]</h3>
+          <p>[[一句话概括当前状态。]]</p>
+          <ul class="clean-list">
+            <li>[[要点一]]</li>
+            <li>[[要点二]]</li>
+            <li>[[要点三]]</li>
+          </ul>
+        </article>
+        <article class="card accent-blue">
+          <h3>[[目标状态标题]]</h3>
+          <p>[[一句话概括目标状态。]]</p>
+          <ul class="clean-list">
+            <li>[[要点一]]</li>
+            <li>[[要点二]]</li>
+            <li>[[要点三]]</li>
+          </ul>
+        </article>
+      </div>
+      -->
+
+      <!-- OPTION B: Timeline (if showing evolution) -->
+      <!--
+      <div class="timeline">
+        <article class="stage" data-step="1">
+          <h3>[[阶段一标题]]</h3>
+          <p>[[关键词概括。]]</p>
+          <ul>
+            <li>[[要点]]</li>
+            <li>[[要点]]</li>
+          </ul>
+        </article>
+        <article class="stage" data-step="2">
+          <h3>[[阶段二标题]]</h3>
+          <p>[[关键词概括。]]</p>
+          <ul>
+            <li>[[要点]]</li>
+            <li>[[要点]]</li>
+          </ul>
+        </article>
+        <article class="stage" data-step="3">
+          <h3>[[阶段三标题]]</h3>
+          <p>[[关键词概括。]]</p>
+          <ul>
+            <li>[[要点]]</li>
+            <li>[[要点]]</li>
+          </ul>
+        </article>
+      </div>
+      -->
+
+      <!-- OPTION C: Simple paragraph + callout -->
+      <p>[[展开现状描述。]]</p>
+      <div class="callout">[[关键判断。]]</div>
+    </section>
+
+    <!-- ==================== 03 关键洞察 ==================== -->
+    <section id="s-insights">
+      <div class="section-head">
+        <div class="section-kicker">03 / [[章节标签，如：关键洞察]]</div>
+        <div>
+          <h2>[[关键洞察标题]]</h2>
+          <p class="section-lede">[[一句话 lead：从现状中提炼出的 2–3 个关键发现。]]</p>
+        </div>
+      </div>
+
+      <!-- Use two-col or three-col card grid for insights -->
+      <!--
+      <div class="two-col">
+        <article class="card accent-blue">
+          <h3>[[洞察一标题]]</h3>
+          <p>[[一句话概括洞察。]]</p>
+          <ul class="clean-list">
+            <li>[[支撑证据]]</li>
+            <li>[[支撑证据]]</li>
+          </ul>
+        </article>
+        <article class="card accent-green">
+          <h3>[[洞察二标题]]</h3>
+          <p>[[一句话概括洞察。]]</p>
+          <ul class="clean-list">
+            <li>[[支撑证据]]</li>
+            <li>[[支撑证据]]</li>
+          </ul>
+        </article>
+      </div>
+      -->
+
+      <!-- OPTIONAL: Three insights in formula layout (A + B + C) -->
+      <!--
+      <div class="formula" aria-label="[[公式含义]]">
+        <div class="piece">
+          <h3>[[要素一]]</h3>
+          <p>[[说明。]]</p>
+        </div>
+        <div class="op">+</div>
+        <div class="piece">
+          <h3>[[要素二]]</h3>
+          <p>[[说明。]]</p>
+        </div>
+        <div class="op">+</div>
+        <div class="piece">
+          <h3>[[要素三]]</h3>
+          <p>[[说明。]]</p>
+        </div>
+      </div>
+      -->
+    </section>
+
+    <!-- ==================== 04 策略方向 ==================== -->
+    <section id="s-strategy">
+      <div class="section-head">
+        <div class="section-kicker">04 / [[章节标签，如：策略方向]]</div>
+        <div>
+          <h2>[[策略方向标题]]</h2>
+          <p class="section-lede">[[一句话 lead：方向性建议，不纠结细节。]]</p>
+        </div>
+      </div>
+
+      <!-- OPTION A: Strategy cards (3-col) -->
+      <!--
+      <div class="three-col">
+        <article class="card accent-blue">
+          <h3>策略一｜[[标题]]</h3>
+          <p>[[一句话说明。]]</p>
+          <ul class="clean-list">
+            <li>[[关键动作]]</li>
+            <li>[[预期效果]]</li>
+          </ul>
+        </article>
+        <article class="card accent-green">
+          <h3>策略二｜[[标题]]</h3>
+          <p>[[一句话说明。]]</p>
+          <ul class="clean-list">
+            <li>[[关键动作]]</li>
+            <li>[[预期效果]]</li>
+          </ul>
+        </article>
+        <article class="card accent-teal">
+          <h3>策略三｜[[标题]]</h3>
+          <p>[[一句话说明。]]</p>
+          <ul class="clean-list">
+            <li>[[关键动作]]</li>
+            <li>[[预期效果]]</li>
+          </ul>
+        </article>
+      </div>
+      -->
+
+      <!-- OPTION B: Logic strip (two connected strategic moves) -->
+      <!--
+      <div class="logic-strip">
+        <article class="logic-card resource">
+          <h3>[[方向A标题]]</h3>
+          <ul class="clean-list">
+            <li>[[要点]]</li>
+            <li>[[要点]]</li>
+          </ul>
+        </article>
+        <div class="arrow">→</div>
+        <article class="logic-card decision">
+          <h3>[[方向B标题]]</h3>
+          <ul class="clean-list">
+            <li>[[要点]]</li>
+            <li>[[要点]]</li>
+          </ul>
+        </article>
+      </div>
+      -->
+    </section>
+
+    <!-- ==================== 05 路径 / 取舍 ==================== -->
+    <section id="s-tradeoffs">
+      <div class="section-head">
+        <div class="section-kicker">05 / [[章节标签，如：路径与取舍]]</div>
+        <div>
+          <h2>[[路径研判标题]]</h2>
+          <p class="section-lede">[[一句话 lead：关键取舍是什么，为什么这两个选项是真正的张力点。]]</p>
+        </div>
+      </div>
+
+      <!-- OPTION A: Decision model (two approaches side-by-side, with images) -->
+      <!--
+      <div class="decision-model">
+        <article class="model-card">
+          <h3>[[方案A标题]]</h3>
+          <p>[[一句定义。]]</p>
+          <img class="model-image" loading="lazy" onerror="this.style.display='none'" src="[[URL 或 data:image/...;base64,...]]" alt="[[方案A示意图]]">
+          <ul class="clean-list">
+            <li><strong>优势：</strong>[[优势说明]]</li>
+            <li><strong>风险：</strong>[[风险说明]]</li>
+          </ul>
+        </article>
+        <article class="model-card">
+          <h3>[[方案B标题]]</h3>
+          <p>[[一句定义。]]</p>
+          <img class="model-image" loading="lazy" onerror="this.style.display='none'" src="[[URL 或 data:image/...;base64,...]]" alt="[[方案B示意图]]">
+          <ul class="clean-list">
+            <li><strong>优势：</strong>[[优势说明]]</li>
+            <li><strong>风险：</strong>[[风险说明]]</li>
+          </ul>
+        </article>
+      </div>
+      -->
+
+      <!-- OPTION B: Path map (two-track process comparison) -->
+      <!--
+      <div class="path-map">
+        <article class="path-panel track-a">
+          <h3>[[路径A标题]]</h3>
+          <p>[[一句定义。]]</p>
+          <div class="path-step"><b>[[步骤一]]</b><div><p>[[说明。]]</p><div class="tags"><span>[[标签]]</span></div></div></div>
+          <div class="path-step"><b>[[步骤二]]</b><div><p>[[说明。]]</p><div class="tags"><span>[[标签]]</span></div></div></div>
+          <div class="path-step"><b>[[步骤三]]</b><div><p>[[说明。]]</p><div class="tags"><span>[[标签]]</span></div></div></div>
+        </article>
+        <article class="path-panel track-b">
+          <h3>[[路径B标题]]</h3>
+          <p>[[一句定义。]]</p>
+          <div class="path-step"><b>[[步骤一]]</b><div><p>[[说明。]]</p><div class="tags"><span>[[标签]]</span></div></div></div>
+          <div class="path-step"><b>[[步骤二]]</b><div><p>[[说明。]]</p><div class="tags"><span>[[标签]]</span></div></div></div>
+          <div class="path-step"><b>[[步骤三]]</b><div><p>[[说明。]]</p><div class="tags"><span>[[标签]]</span></div></div></div>
+        </article>
+      </div>
+      -->
+
+      <div class="callout">[[方向性结论：可以不是二选一，而是节奏安排或前置条件判断。]]</div>
+    </section>
+
+    <!-- ==================== 06 下一步 / 行动 ==================== -->
+    <section id="s-next">
+      <div class="section-head">
+        <div class="section-kicker">06 / [[章节标签，如：下一步行动]]</div>
+        <div>
+          <h2>[[下一步行动标题]]</h2>
+          <p class="section-lede">[[一句话 lead：接下来要做什么，谁负责，什么时候。]]</p>
+        </div>
+      </div>
+
+      <!-- OPTION A: Flow (horizontal process, 6 steps max) -->
+      <!--
+      <div class="flow">
+        <div>[[步骤1]]<span>[[说明]]</span></div>
+        <div>[[步骤2]]<span>[[说明]]</span></div>
+        <div>[[步骤3]]<span>[[说明]]</span></div>
+        <div>[[步骤4]]<span>[[说明]]</span></div>
+        <div>[[步骤5]]<span>[[说明]]</span></div>
+        <div>[[步骤6]]<span>[[说明]]</span></div>
+      </div>
+      -->
+
+      <!-- OPTION B: Role map (who does what) -->
+      <!--
+      <div class="role-map">
+        <article class="role-card">
+          <div class="role-code">[[编号或代号]]</div>
+          <h3>[[角色名称]]</h3>
+          <p>[[职责说明。]]</p>
+          <ul class="clean-list">
+            <li>[[关键动作]]</li>
+            <li>[[交付物]]</li>
+          </ul>
+        </article>
+        <article class="role-card">
+          <div class="role-code">[[编号或代号]]</div>
+          <h3>[[角色名称]]</h3>
+          <p>[[职责说明。]]</p>
+          <ul class="clean-list">
+            <li>[[关键动作]]</li>
+            <li>[[交付物]]</li>
+          </ul>
+        </article>
+        <article class="role-card">
+          <div class="role-code">[[编号或代号]]</div>
+          <h3>[[角色名称]]</h3>
+          <p>[[职责说明。]]</p>
+          <ul class="clean-list">
+            <li>[[关键动作]]</li>
+            <li>[[交付物]]</li>
+          </ul>
+        </article>
+      </div>
+      -->
+    </section>
+
+    <!-- ==================== (OPTIONAL) 附录 / 数据 ==================== -->
+    <!--
+    <section id="s-appendix">
+      <div class="section-head">
+        <div class="section-kicker">附 / [[附录标签]]</div>
+        <div>
+          <h2>[[附录标题]]</h2>
+          <p class="section-lede">[[支撑数据、方法论说明、免责声明。]]</p>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>[[维度]]</th><th>[[数据A]]</th><th>[[数据B]]</th></tr></thead>
+          <tbody>
+            <tr><td>[[..]]</td><td>[[..]]</td><td>[[..]]</td></tr>
+            <tr><td>[[..]]</td><td>[[..]]</td><td>[[..]]</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    -->
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer>
+    <p>[[免责与数据口径：结论基于…；硬数据以…为准；带【待补充】项落地前请核验。]]</p>
+    <p style="margin-top:10px;color:var(--blue);font-weight:500">[[报告名]]　|　[[团队/编制方]]　|　[[YYYY.MM.DD]]</p>
+  </footer>
+
+</div>
+
+<!-- ==================== PROGRESS BAR SCRIPT ==================== -->
+<script>
+  (function() {
+    var bar = document.getElementById('progress');
+    if (!bar) return;
+    function update() {
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = docHeight > 0 ? Math.min(100, (scrollTop / docHeight) * 100) : 0;
+      bar.style.width = pct + '%';
+    }
+    window.addEventListener('scroll', update, {passive: true});
+    update();
+  })();
+</script>
+
+</body>
+</html>
