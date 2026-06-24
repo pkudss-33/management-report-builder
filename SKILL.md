@@ -116,6 +116,19 @@ component:
 To re-skin for a different brand/subject, change only the `:root` CSS variables,
 not individual components.
 
+### Theme selection (built-in alternative themes)
+
+The template includes two complete themes. Switch between them by changing the `<html>` tag:
+
+| Keyword triggers | Theme | `<html>` tag |
+|---|---|---|
+| (default, no keyword) | **Cool Corporate** — blue-centric, thin sans-serif (weight 300), white/gray background | `<html lang="zh-CN">` |
+| **"reflection格式"** / **"绿色主题"** / **"简洁主题"** | **Reflection** — deep forest green on warm cream, all sans-serif (Inter + Noto Sans SC), tight headings, generous whitespace. Inspired by reflection.ai | `<html lang="zh-CN" data-theme="reflection">` |
+
+When the user includes ANY of the keywords "reflection格式", "绿色主题", or "简洁主题" in
+their request, activate the Reflection theme by setting `data-theme="reflection"` on the
+`<html>` tag. The CSS overrides are already in the template — no need to write new styles.
+
 ### 5. Self-check before delivering
 - **Hero impact:** the hero section alone should communicate the entire report's
   thesis. If the eyebrow + h1 + lead don't tell the story, rewrite them.

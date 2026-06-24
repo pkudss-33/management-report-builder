@@ -41,10 +41,11 @@
 <meta name="color-scheme" content="light">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
   /* =======================================================================
-     DESIGN SYSTEM — change :root variables to re-skin; keep everything else.
+     DEFAULT THEME: Cool Corporate (blue-centric, thin sans-serif, white/gray)
+     酷炫的企业设计系统
      ======================================================================= */
   :root {
     /* ---- Core palette ---- */
@@ -69,6 +70,222 @@
     /* ---- Typography — thin modern sans-serif ---- */
     --body: "Inter", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Microsoft YaHei", sans-serif;
     --body-weight: 300;
+  }
+
+  /* =======================================================================
+     ALTERNATIVE THEME: Reflection (reflection.ai inspired)
+     Trigger keywords: "reflection格式" / "绿色主题" / "简洁主题"
+     Activate: change <html lang="zh-CN"> to <html lang="zh-CN" data-theme="reflection">
+
+     Design philosophy — "Crunchy minimalism":
+     - Deep forest green (#1a5427) on warm cream (#f8f6f2) paper
+     - Headings: Crimson Text (serif, weight 400, line-height 0.88)
+     - Body/UI: Inter (sans-serif, 1.1rem, line-height 1.4)
+     - Extremely tight heading line-heights for impact
+     - Typography matched to reflection.ai measured values
+     ======================================================================= */
+  html[data-theme="reflection"] {
+    /* ---- Warm cream + deep green palette ---- */
+    --ink: #041309;
+    --muted: #4d4d4d;
+    --subtle: #e7e3db;
+    --line: #edecea;
+    --paper: #ffffff;
+    --wash: #f8f6f2;
+
+    /* ---- Accent: green replaces blue ---- */
+    --blue: #1a5427;
+    --green: #247937;
+    --amber: #8b6914;
+    --red: #b04444;
+    --teal: #1a6b54;
+
+    /* ---- Surfaces ---- */
+    --shadow: 0 14px 40px rgba(4, 19, 9, .06);
+    --radius: 6px;
+
+    /* ---- Typography: Crimson Text headings + Inter body ---- */
+    --body: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+    --body-weight: 400;
+  }
+  /* ---- Typography: measured from reflection.ai CSS ---- */
+  /* H1: Crimson Text 400 / 3.125rem→4.25rem / line-height 0.88 / tracking -0.04em */
+  html[data-theme="reflection"] h1 {
+    font-family: "Crimson Text", "Georgia", serif;
+    font-size: clamp(3.125rem, 5.5vw, 4.25rem);
+    line-height: 0.88;
+    letter-spacing: -0.04em;
+    font-weight: 400;
+  }
+  /* H2: Crimson Text 400 / 2.5rem→3rem / line-height 0.88 / tracking -0.02em */
+  html[data-theme="reflection"] h2 {
+    font-family: "Crimson Text", "Georgia", serif;
+    font-size: clamp(2.5rem, 3.5vw, 3rem);
+    line-height: 0.88;
+    letter-spacing: -0.02em;
+    font-weight: 400;
+  }
+  /* H3: Crimson Text 400 / 1.8rem→2rem / line-height 1.0 / tracking -0.02em */
+  html[data-theme="reflection"] h3 {
+    font-family: "Crimson Text", "Georgia", serif;
+    font-size: clamp(1.6rem, 2.2vw, 2rem);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    font-weight: 400;
+  }
+  /* Lead paragraph: Inter 400 / 1.1rem / line-height 1.4 */
+  html[data-theme="reflection"] .lead {
+    font-family: var(--body);
+    font-size: 1.1rem;
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--muted);
+    letter-spacing: 0;
+  }
+  /* Section lede: Inter 400 / 1.1rem */
+  html[data-theme="reflection"] .section-lede {
+    font-family: var(--body);
+    font-size: 1.1rem;
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--muted);
+  }
+  /* Section kicker: Inter 500 / 0.8125rem */
+  html[data-theme="reflection"] .section-kicker {
+    font-family: var(--body);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--blue);
+  }
+  /* Eyebrow: Inter 500 / 0.8125rem */
+  html[data-theme="reflection"] .eyebrow {
+    font-family: var(--body);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--green);
+  }
+  html[data-theme="reflection"] .eyebrow::before {
+    background: var(--green);
+  }
+  /* Card headings */
+  html[data-theme="reflection"] .card h3,
+  html[data-theme="reflection"] .stage h3,
+  html[data-theme="reflection"] .logic-card h3,
+  html[data-theme="reflection"] .role-card h3,
+  html[data-theme="reflection"] .voice-card h3 {
+    font-family: "Crimson Text", "Georgia", serif;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  /* Card body text */
+  html[data-theme="reflection"] .card p,
+  html[data-theme="reflection"] .stage p,
+  html[data-theme="reflection"] .logic-card p {
+    font-family: var(--body);
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+  /* Tags / pills */
+  html[data-theme="reflection"] .tag,
+  html[data-theme="reflection"] .tags span {
+    font-family: var(--body);
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+  /* Table typography */
+  html[data-theme="reflection"] th {
+    font-family: var(--body);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    background: #eef3ef;
+  }
+  html[data-theme="reflection"] td {
+    font-family: var(--body);
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
+  /* Hero & surfaces */
+  html[data-theme="reflection"] .hero {
+    background: var(--paper);
+  }
+  /* ---- Body base ---- */
+  html[data-theme="reflection"] body {
+    font-family: var(--body);
+    font-size: 1.1rem;
+    line-height: 1.4;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  html[data-theme="reflection"] p {
+    margin: 16px 0;
+  }
+  /* ---- Remap accent-colored components ---- */
+  html[data-theme="reflection"] .card.accent-blue  { border-top-color: var(--blue); }
+  html[data-theme="reflection"] .card.accent-green { border-top-color: var(--green); }
+  html[data-theme="reflection"] .card.accent-amber { border-top-color: var(--amber); }
+  html[data-theme="reflection"] .card.accent-teal  { border-top-color: var(--teal); }
+  html[data-theme="reflection"] .callout {
+    border-left-color: var(--green);
+    background: #f4faf7;
+    color: #17382f;
+    font-family: var(--body);
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+  html[data-theme="reflection"] .stage::before {
+    background: #e5efe8;
+    color: var(--blue);
+  }
+  html[data-theme="reflection"] .stage:nth-child(2)::before {
+    background: #e0f0e8;
+    color: var(--green);
+  }
+  html[data-theme="reflection"] .stage:nth-child(3)::before {
+    background: #faf3e0;
+    color: var(--amber);
+  }
+  html[data-theme="reflection"] .logic-card.resource  { border-top-color: var(--amber); }
+  html[data-theme="reflection"] .logic-card.decision  { border-top-color: var(--green); }
+  html[data-theme="reflection"] .logic-card.strategy  { border-top-color: var(--blue); }
+  html[data-theme="reflection"] .path-panel.track-a { border-top-color: var(--blue); }
+  html[data-theme="reflection"] .path-panel.track-b { border-top-color: var(--green); }
+  html[data-theme="reflection"] .role-code { color: var(--blue); }
+  html[data-theme="reflection"] .voice-card::before { background: var(--blue); }
+  html[data-theme="reflection"] .voice-card:nth-child(2)::before { background: var(--green); }
+  html[data-theme="reflection"] .voice-card:nth-child(3)::before { background: var(--amber); }
+  html[data-theme="reflection"] .challenge-card {
+    background: #fffdf7;
+    border-color: #e0dcc8;
+  }
+  html[data-theme="reflection"] .challenge-card h3 { color: #5c4a0a; }
+  html[data-theme="reflection"] .base-card {
+    background: #fffdf7;
+    border-color: #e0dcc8;
+  }
+  html[data-theme="reflection"] .base-card h3 { color: #5c4a0a; }
+  html[data-theme="reflection"] .summary-tile {
+    background: #f8fbf6;
+  }
+  html[data-theme="reflection"] .summary-tile b { color: var(--blue); }
+  html[data-theme="reflection"] .onepage-tabs {
+    background: var(--subtle);
+  }
+  html[data-theme="reflection"] .onepage-tab[aria-selected="true"] {
+    color: var(--blue);
+  }
+  html[data-theme="reflection"] .tags span {
+    background: #eef3ef;
+    color: #2a4a2e;
+  }
+  html[data-theme="reflection"] .tag {
+    background: #f8fbf6;
+  }
+  html[data-theme="reflection"] .thesis strong { color: var(--blue); }
+  /* ---- Progress bar remapped to green gradient ---- */
+  html[data-theme="reflection"] .progress {
+    background: linear-gradient(90deg, var(--blue), var(--green), var(--amber));
   }
 
   /* ---- Reset & base ---- */
